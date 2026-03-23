@@ -1,0 +1,41 @@
+# Python specific ignores
+__pycache__/
+.venv/
+venv/
+*.py[cod]
+
+# C specific ignores
+*.a
+*.o
+*.out
+*.so
+
+# Build artefacts
+build/
+
+# Temporary files, logs and process IDs
+*.bak
+*.log
+*.old
+*.pid
+*.tmp
+nohup.out
+
+# Secrets and local environment overrides
+.env
+.env.*
+*.secret
+
+# JetBrains IDEs
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Vim and Neovim
+*.swn
+*.swo
+*.swp
+*~
+[._]*.un~
+Session.vim
