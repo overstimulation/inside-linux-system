@@ -1,0 +1,104 @@
+Zaliczenie z przedmiotu "System Linux od podszewki"
+III rok informatyki, rok akademicki 2025/2026
+
+Waszym zadaniem jest napisanie skryptu modyfikującego dystrybucję Slax.
+
+Czym jest Slax?
+---------------
+
+Slax jest dystrybucją Linuksa typu live. Autor dystrybucji do wersji 7 bazował
+na pakietach Slackware. Od wersji 9 (wersji 8 nie było) zaczął używać Debiana,
+a obecnie wydaje równolegle dwie wersje. Slax posiada mechanizm aktywacji i
+deaktywacji pakietów podczas pracy systemu, więc można go uzupełniać o nowe
+oprogramowanie bez konieczności wprowadzania ręcznie zmian na nośniku. W
+standardowej konfiguracji wszelkie zmiany w systemie zaistniałe podczas pracy
+są zapisywane na pendrive'ie i odtwarzane podczas kolejnego bootowania.
+Mechanizm ten nazwany jest "persistent changes".
+
+Do pracy potrzebny jest pendrive oraz dystrybucja Slax 15.0 dostępna tutaj:
+http://ftp.sh.cvut.cz/slax/Slax-15.x/slax-64bit-15.0.0.iso
+Jest ona zbudowana na czystym Slackware64 15.0.
+
+Aby stworzyć bootowalny nośnik należy zalogować się na konto root (komenda
+sudo często nie wystarcza!) i zamontować pendrive. Pobrany plik należy
+rozpakować do głównego katalogu pendrive'a, a następnie przeprowadzić proces
+instalacji bootloadera na pendrive'ie poprzez uruchomienie skryptu
+slax/boot/bootinst.sh
+
+Jeśli wszystko się udało, jest możliwy boot komputera z pendrive'a - pojawia
+się ekran z zieloną koniczynką, system uruchamia się domyślnie z logowaniem na
+konto root.
+
+Opcje uruchamiania:
+- fresh start - oznacza wgranie czystego systemu (tylko moduły Slaksa)
+- persistent changes - oznacza system + zapamiętane zmiany
+- copy to ram - oznacza skopiowanie czystego systemu do pamięci i nie
+  korzystanie z pendrive'a podczas pracy; zmiany są zapominane
+
+Zadanie
+-------
+
+Napisz skrypt powłoki, który uruchomiony na standardowej dystrybucji Slax
+wykona następujące zmiany w systemie:
+
+Zad.1 - Aktualizacja
+
+Korzystając z informacji z katalogu /var/log/packages należy pobrać patche
+tych pakietów, które są założone w systemie. Nie aktualizować jądra! Pakiety
+zachować na dysku w katalogu /root/patches. Zaktualizować za ich pomocą system.
+
+Zad.2 - Zegarek
+
+Proszę zmienić strefę czasową zegara systemowego na "Europe/Warsaw".
+
+Zad.3 - Podmiana przeglądarki
+
+(a) Proszę usunąć konto guest.
+(b) Proszę dodać swoje konto, bez nadawania mu uprawnień administracyjnych.
+(c) Proszę usunąć wpis "Chrome" z menu znajdującego się pod prawym przyciskiem
+    myszy.
+(d) Proszę usunąć wpis "Chrome" z menu pojawiającego się po naciśnięciu
+    zielonego przycisku na pasku zadań.
+(e) Dodać pakiet z przeglądarką Firefox. Najnowszą wersję mozna znaleźć tam,
+    gdzie patche systemowe (patrz zad.1).
+
+W tym momencie należy zapamiętać stan systemu poprzez mechanizm "persistent
+changes".
+
+Zad.4 - Kompilacja własnego pakietu
+
+Należy skompilować edytor tekstu XNedit i spakować go do postaci pakietu
+Slaksa.
+
+(a) Pobierz źródła xnedit-1.6.3.tar.gz, rozpakuj je.
+(b) Aby skompilować edytor, będzie trzeba dodać do dystrybucji pakiety
+    Slackware dwóch typów:
+    - brakujące narzędzia deweloperskie
+    - biblioteki i pliki nagłówkowe jądra
+    Wszystkie je można znaleźć w repozytoriach Slackware'a. Skompiluj edytor.
+(c) Stwórz pakiet 90-xnedit.sb, umieścić go w odpowiednim miejscu na
+    pendrivie. Wgranie tego pakietu powinno spowodować, że xnedit pojawi się w
+    katalogu /usr/local/bin
+(d) Sprzątanie: usuń pakiety deweloperskie które trzeba było dograć. Nie
+    usuwaj bibliotek ani plików nagłówkowych jądra. Usuń katalog ze źródłami
+    xnedit.
+
+Przetestuj, czy po ponownym uruchomieniu systemu wszystkie wprowadzone zmiany
+są widoczne?
+
+Przydatne linki:
+--------------------------
+
+https://www.slax.org/
+http://www.slackware.com/
+http://xlunch.org/
+https://sourceforge.net/projects/xnedit/
+
+Termin oddawania prac
+---------------------
+
+Na skrypt czekam do 1 lipca 2026. Wyślijcie go na dwa adresy
+mgozdz@kft.umcs.lublin.pl
+marek.gozdz@mail.umcs.pl
+
+Powodzenia!
